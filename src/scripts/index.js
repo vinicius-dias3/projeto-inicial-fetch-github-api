@@ -3,6 +3,17 @@ document.querySelector('#btn-search').addEventListener('click', ()=> {
     getUserProfile(userName)
 })
 
+document.querySelector('#input-search').addEventListener('keyup', (e)=> {
+    const userName = e.target.value
+    const key = e.which || e.keyCode
+    const isEnterPressed = key === 13
+    
+    if(isEnterPressed){
+        console.log(isEnterPressed)
+        getUserProfile(userName)
+    }
+})
+
 async function user(userName){
     const resposta = await fetch(`https://api.github.com/users/${userName}`)
     return await resposta.json()
@@ -18,3 +29,5 @@ function getUserProfile(userName){
         document.querySelector('.profile-data').innerHTML = userInfo
     })
 }
+
+// getUserProfile('nomedousuario')
