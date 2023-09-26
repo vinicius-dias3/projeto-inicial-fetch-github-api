@@ -141,6 +141,7 @@ main {
   display: block;
   border-radius: 7px;
   transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .container .profile-data .repositories ul li a:hover{
