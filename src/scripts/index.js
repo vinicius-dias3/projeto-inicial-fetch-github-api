@@ -5,8 +5,16 @@ import { screen } from "/src/scripts/objects/screen.js"
 
 document.querySelector('#btn-search').addEventListener('click', ()=> {
     const userName = document.querySelector('#input-search').value
+    if(validateEmptyInput(userName)) return
     getUserData(userName)
 })
+
+function validateEmptyInput(userName){
+    if(userName.length === 0){
+        alert('Preencha o campo com o nome do usuário do Github')
+        return true
+    }
+}
 
 document.querySelector('#input-search').addEventListener('keyup', (e)=> {
     const userName = e.target.value
@@ -14,7 +22,7 @@ document.querySelector('#input-search').addEventListener('keyup', (e)=> {
     const isEnterPressed = key === 13
     
     if(isEnterPressed){
-        // console.log(isEnterPressed)
+        if(validateEmptyInput(userName)) return
         getUserData(userName)
     }
 })
@@ -22,14 +30,15 @@ document.querySelector('#input-search').addEventListener('keyup', (e)=> {
 
 async function getUserData(userName){
     const userResponse = await getUser(userName)
+    console.log(userResponse)
+    
     const repositoriesResponse = await getRepositories(userName)
+    
     user.setInfo(userResponse)
     user.setRepositories(repositoriesResponse)
-    console.log(user)
-    // console.log(userResponse)
-    // console.log(user)
-    // user.repositories(repositories)
-
+    if(userResponse.message === 'Not Found'){
+        screen.renderNotFound()
+        return
+    }
     screen.renderUser(user)
-
 }
