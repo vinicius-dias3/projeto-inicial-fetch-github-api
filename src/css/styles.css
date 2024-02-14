@@ -6,9 +6,7 @@
   font-weight: 300;
 }
 
-img {
-  max-width: 100%;
-}
+img {max-width: 100%;}
 
 body {
   background-color:#24292e;
@@ -30,9 +28,7 @@ main {
   color: #FFFFFF;
 }
 
-.section{
-  padding: 70px 0;
-}
+.section{padding: 50px 0 0px;}
 
 .container {
   width: 60%; /* se for uma tela menor que 980px vai se adaptar a 70% */
@@ -123,35 +119,123 @@ main {
 
 /* REPOSITORIES */
 
-.container .profile-data .repositories h2{
-  margin-bottom: 30px;
+.container .profile-data .repositories h2,
+.container .profile-data .events h2{
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.container .profile-data .repositories ul{
+.container .profile-data .repositories ul,
+.container .profile-data .events ul{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.container .profile-data .repositories ul li a{
-  padding: 20px;
+.repositories ul li.each-repo{
+  position: relative;
+  padding: 10px;
   border: 1px solid grey;  
-  margin: 20px;
-  display: block;
+  margin: 10px;
   border-radius: 7px;
-  transition: 0.3s ease-in-out;
+  transition: all .6s ease;
+  overflow: hidden;
+}
+
+.repositories ul li.each-repo:hover{box-shadow: rgba(255, 105, 180, 0.2) 0px 15px 25px, rgba(255, 105, 180, 0.4) 0px 5px 10px;}
+
+.repositories ul li.each-repo::before{
+  position: absolute;
+  content: '';
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, transparent, white);
+  opacity: 0;
+  transition: all .4s linear;
+}
+
+.repositories ul li.each-repo:hover::before{
+  background-image: linear-gradient(to bottom, hotpink 5%, #ff90c8 35%, transparent);
+  opacity: 1;
+}
+
+.repositories ul li.each-repo ul li{
+  position: relative;
+  border: 1px solid grey;
+  padding: 8px;
+  margin: 10px 5px;
+  border-radius: 7px;
+  background-color: #eeeeee;
+}
+
+.repositories ul li.each-repo:hover ul li{
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: grey;
+}
+
+.repositories ul li.each-repo a{
+  position: relative;
+  transition: .2s ease-out;
+}
+
+.repositories ul li.each-repo a:hover{
+  color: #000;
   cursor: pointer;
 }
 
-.container .profile-data .repositories ul li a:hover{
-  background-color:hotpink;
-  color: #fff
+.repositories ul li.each-repo:hover a::after{
+  transition: .7s ease-out;
+  border-radius: 7px;
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  content: "";
+  z-index: 0;
+  width: 100%;
+  scale: .1;
+  height: 1px;
 }
 
-.container .profile-data.hide{
-  display: none;
+.repositories ul li.each-repo a:hover::after{
+  left: 0;
+  background: radial-gradient(circle, #000 40%, #ff90c8 100%);
+  scale: 1;
 }
+
+.container .profile-data.hide{display: none;}
+
+.container .profile-data .events ul li{
+  padding: 10px 10px 14px;
+  border: 1px solid grey;  
+  margin: 20px 10px;
+  display: block;
+  border-radius: 7px;
+  max-width: 314px;
+  position: relative;
+  overflow: hidden;
+}
+
+.container .profile-data .events ul li::after{
+  transition: .4s ease-out;
+  border-radius: 7px;
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  content: "";
+  z-index: 0;
+  width: 0;
+  height: 4px;
+  background-color: hotpink;
+}
+
+.container .profile-data .events ul li:hover::after{
+  width: 100%;
+  left: 0;
+}
+
+.events ul li span{font-weight: 600;}
 
 @media (max-width: 1280px) {
   .container {
@@ -160,9 +244,7 @@ main {
     border-radius: 20px;
   }
 
-  .container header {
-    width: 100%;
-  }
+  .container header {width: 100%;}
 
   .container header h1 {
     font-size: 24px;
@@ -172,24 +254,22 @@ main {
 
 @media (max-width: 768px) {
   .container header #input-search,
-  .container header #btn-search
-  {
-    width: 100%;
-  }
+  .container header #btn-search{width: 100%;}
+
+  .container .profile-data .repositories,
+  .container .profile-data .events{margin: 0 -40px;}
 }
 
 @media (max-width: 425px) {
-  main {
-    padding: 15% 0;    
-  }
+  main {padding: 15% 0;}
 
   .container .profile-data .info img{
-    margin-bottom: 20px;
+    margin: 0 auto 30px;
+    /* max-width: 100%; */
   }
 
   .container .profile-data .info img,
-  .container .profile-data .info .data
-  {
+  .container .profile-data .info .data{
     width: 100%;
     padding: 0;
   }

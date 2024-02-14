@@ -1,7 +1,8 @@
-import { getUser } from "/src/scripts/services/user.js"
-import { getRepositories } from "/src/scripts/services/repositories.js"
-import { user } from "/src/scripts/objects/user.js"
-import { screen } from "/src/scripts/objects/screen.js"
+import { getUser } from "./services/user.js"
+import { getRepositories } from "./services/repositories.js"
+import { getEvents } from "./services/events.js"
+import { user } from "./objects/user.js"
+import { screen } from "./objects/screen.js"
 
 document.querySelector('#btn-search').addEventListener('click', ()=> {
     const userName = document.querySelector('#input-search').value
@@ -30,15 +31,21 @@ document.querySelector('#input-search').addEventListener('keyup', (e)=> {
 
 async function getUserData(userName){
     const userResponse = await getUser(userName)
-    console.log(userResponse)
-    
     const repositoriesResponse = await getRepositories(userName)
-    
+    const eventsResponse = await getEvents(userName)
+    const repositoriesFiltered = repositoriesResponse.filter(repo => {
+        const dataLimite = new Date('2023-03-01')
+        return new Date(repo.created_at) >= dataLimite
+    })
+
+    const tenRepositories = repositoriesFiltered.slice(0, 10)
+        
     user.setInfo(userResponse)
-    user.setRepositories(repositoriesResponse)
+    user.setRepositories(tenRepositories)
     if(userResponse.message === 'Not Found'){
         screen.renderNotFound()
         return
     }
+    user.setEvents(eventsResponse)
     screen.renderUser(user)
 }
