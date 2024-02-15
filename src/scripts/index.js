@@ -34,14 +34,14 @@ async function getUserData(userName){
     const repositoriesResponse = await getRepositories(userName)
     const eventsResponse = await getEvents(userName)
     const repositoriesFiltered = repositoriesResponse.filter(repo => {
-        const dataLimite = new Date('2023-03-01')
+        const dataLimite = new Date('2022-01-01')
         return new Date(repo.created_at) >= dataLimite
     })
 
-    const tenRepositories = repositoriesFiltered.slice(0, 10)
+    const repositoriesQuantity = repositoriesFiltered.slice(0, 10)
         
     user.setInfo(userResponse)
-    user.setRepositories(tenRepositories)
+    user.setRepositories(repositoriesQuantity)
     if(userResponse.message === 'Not Found'){
         screen.renderNotFound()
         return

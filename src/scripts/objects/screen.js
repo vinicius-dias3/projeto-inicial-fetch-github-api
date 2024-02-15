@@ -49,7 +49,7 @@ const screen = {
             if(event.payload.commits){
                 commitMsg = event.payload.commits[0].message
             }else{
-                commitMsg = 'sem mensagem de commit'
+                commitMsg = 'nenhuma mensagem registrada'
             }
             eventsItens += `<li><span>${eventName}</span> - ${commitMsg}</li>`
         })

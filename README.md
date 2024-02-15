@@ -68,7 +68,7 @@ for(const repo of user.repositories){
 
 ```Javascript
         const repositoriesFiltered = repositoriesResponse.filter(repo => {
-        const dataLimite = new Date('2023-03-01')
+        const dataLimite = new Date('2023-01-01')
         return new Date(repo.created_at) >= dataLimite
     })
 
@@ -76,3 +76,7 @@ for(const repo of user.repositories){
 ```
 
 Este projeto desafiador representa uma oportunidade para aprimorar minhas habilidades em JavaScript. Considero-o complexo e significativo, proporcionando uma prática fundamental no desenvolvimento."
+
+### Demonstração do projeto
+
+![demonstração do projeto](./src/images/projeto-api-github-funcionando.gif)
